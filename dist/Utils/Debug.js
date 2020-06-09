@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const MovementDirection_1 = require("../Input/MovementDirection");
 const log4js_1 = require("log4js");
 function debug(debugMode = "FULL") {
     return function (target, propertyKey, descriptor) {
@@ -51,12 +50,6 @@ class Debug {
     }
     display() {
         console.log('\x1Bc' + "Exited");
-    }
-    start(intervalID, input) {
-        input.onKeypress((k) => {
-            clearInterval(intervalID);
-            this.display();
-        }, MovementDirection_1.MovementDirection.EXIT);
     }
 }
 exports.Debug = Debug;

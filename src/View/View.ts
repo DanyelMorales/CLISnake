@@ -1,7 +1,7 @@
-import {Canvas} from "../Canvas";
+import {ICanvas} from "../Canvas";
 
 export interface View {
-    render(matrix: Canvas);
+    render(matrix: ICanvas);
 
 }
 

@@ -18,6 +18,32 @@ export class AbstractActor implements Actor {
         protected configuration: Configuration) {
     }
 
+    createBones(numberOfBones: number, coordinate: Coordinate, axis: "x" | "y" | "xy") {
+        let bones: Coordinate[] = [];
+        bones.push(coordinate);
+        let baseCoordinate: Coordinate = coordinate;
+        for (let i = 0; i < numberOfBones; i++) {
+            let x = 0;
+            let y = 0;
+            if (axis === "x") {
+                x = baseCoordinate.x + i;
+                y = baseCoordinate.y;
+            } else if (axis === "y") {
+                x = baseCoordinate.x;
+                y = baseCoordinate.y + i;
+            } else {
+                x = baseCoordinate.x + i;
+                y = baseCoordinate.y + i;
+            }
+            baseCoordinate = {
+                x: x,
+                y: y
+            };
+            bones.push(baseCoordinate);
+        }
+        return bones;
+    }
+
     addHead(...coordinate: Coordinate[]) {
         coordinate.forEach((coordinate) => {
             this.coordinates.unshift(coordinate);
@@ -49,6 +75,10 @@ export class AbstractActor implements Actor {
     dispose() {
         this._coordinates = new Array<Coordinate>();
         this._oldCoordinates = new Array<Coordinate>();
+    }
+
+    set coordinates(value: Array<Coordinate>) {
+        this._coordinates = value;
     }
 
     get coordinates(): Array<Coordinate> {

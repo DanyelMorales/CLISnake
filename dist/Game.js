@@ -7,6 +7,8 @@ const Snake_1 = require("./Actor/Snake");
 const Food_1 = require("./Actor/Food");
 const Cli_1 = require("./View/Cli");
 const Debug_1 = require("./Utils/Debug");
+const SystemGuard_1 = require("./Utils/SystemGuard");
+const Wall_1 = require("./Actor/Wall");
 class Game {
     constructor(gameService, gameActor) {
         this.gameService = gameService;
@@ -17,18 +19,22 @@ class Game {
         let configuration = new Configuration_1.Configuration();
         let canvas = new Canvas_1.Canvas(configuration, view);
         let keyboard = new Keyboard_1.Keyboard();
+        let systemGuard = new SystemGuard_1.SystemGuard(keyboard, view);
         let debug = Debug_1.Debug.build();
         let gameService = {
             canvas: canvas,
             input: keyboard,
             configuration: configuration,
-            Debug: debug
+            Debug: debug,
+            System: systemGuard
         };
+        let wall = new Wall_1.Wall(gameService);
         let food = new Food_1.Food(gameService);
-        let snake = new Snake_1.Snake(gameService, food);
+        let snake = new Snake_1.Snake(gameService, food, wall);
         let gameActors = {
             Food: food,
-            Snake: snake
+            Snake: snake,
+            Wall: wall
         };
         let game = new Game(gameService, gameActors);
         return game;
@@ -38,12 +44,14 @@ class Game {
         this.gameService.input.start();
         this.gameActor.Snake.start();
         this.gameActor.Food.start();
+        this.gameActor.Wall.start();
         let intervalID = this.startMainLoop();
-        this.gameService.Debug.start(intervalID, this.gameService.input);
+        this.gameService.System.start(intervalID);
     }
     startMainLoop() {
         return setInterval(() => {
             this.gameService.canvas.createBackground();
+            this.gameActor.Wall.draw(this.gameService.canvas);
             this.gameActor.Food.draw(this.gameService.canvas);
             this.gameActor.Snake.draw(this.gameService.canvas);
             this.gameService.canvas.draw();

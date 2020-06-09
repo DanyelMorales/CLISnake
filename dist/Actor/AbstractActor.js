@@ -19,6 +19,33 @@ class AbstractActor {
         this._coordinates = new Array();
         this._collision = new ActorCollision_1.ActorCollision();
     }
+    createBones(numberOfBones, coordinate, axis) {
+        let bones = [];
+        bones.push(coordinate);
+        let baseCoordinate = coordinate;
+        for (let i = 0; i < numberOfBones; i++) {
+            let x = 0;
+            let y = 0;
+            if (axis === "x") {
+                x = baseCoordinate.x + i;
+                y = baseCoordinate.y;
+            }
+            else if (axis === "y") {
+                x = baseCoordinate.x;
+                y = baseCoordinate.y + i;
+            }
+            else {
+                x = baseCoordinate.x + i;
+                y = baseCoordinate.y + i;
+            }
+            baseCoordinate = {
+                x: x,
+                y: y
+            };
+            bones.push(baseCoordinate);
+        }
+        return bones;
+    }
     addHead(...coordinate) {
         coordinate.forEach((coordinate) => {
             this.coordinates.unshift(coordinate);
@@ -44,6 +71,9 @@ class AbstractActor {
     dispose() {
         this._coordinates = new Array();
         this._oldCoordinates = new Array();
+    }
+    set coordinates(value) {
+        this._coordinates = value;
     }
     get coordinates() {
         return this._coordinates;

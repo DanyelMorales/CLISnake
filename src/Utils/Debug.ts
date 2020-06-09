@@ -69,12 +69,7 @@ export class Debug {
         console.log('\x1Bc' + "Exited");
     }
 
-    start(intervalID, input: InputDevice) {
-        input.onKeypress((k) => {
-            clearInterval(intervalID);
-            this.display();
-        }, MovementDirection.EXIT);
-    }
+
 
 }
 

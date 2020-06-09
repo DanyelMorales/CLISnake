@@ -8,7 +8,8 @@ import {Food} from "./Actor/Food";
 import {View} from "./View/View";
 import {CliSnake} from "./View/Cli";
 import {Debug} from "./Utils/Debug";
-import {MovementDirection} from "./Input/MovementDirection";
+import {SystemGuard} from "./Utils/SystemGuard";
+import {Wall} from "./Actor/Wall";
 
 export type Coordinate = {
     x: number, y: number
@@ -16,14 +17,16 @@ export type Coordinate = {
 
 export interface GameActor {
     Snake: Actor,
-    Food: Actor
+    Food: Actor,
+    Wall: Wall
 }
 
 export interface GameService {
     canvas: Canvas,
     input: InputDevice,
     configuration: Configuration,
-    Debug: Debug
+    Debug: Debug,
+    System: SystemGuard
 }
 
 export class Game {
@@ -36,6 +39,7 @@ export class Game {
         let configuration: Configuration = new Configuration();
         let canvas: Canvas = new Canvas(configuration, view);
         let keyboard: Keyboard = new Keyboard();
+        let systemGuard: SystemGuard = new SystemGuard(keyboard, view);
 
         let debug: Debug = Debug.build();
 
@@ -43,15 +47,18 @@ export class Game {
             canvas: canvas,
             input: keyboard,
             configuration: configuration,
-            Debug: debug
+            Debug: debug,
+            System: systemGuard
         };
 
+        let wall: Wall = new Wall(gameService);
         let food: Food = new Food(gameService);
-        let snake: Snake = new Snake(gameService, food);
+        let snake: Snake = new Snake(gameService, food, wall);
 
         let gameActors: GameActor = {
             Food: food,
-            Snake: snake
+            Snake: snake,
+            Wall: wall
         };
         let game: Game = new Game(gameService, gameActors);
 
@@ -59,19 +66,20 @@ export class Game {
     }
 
     start() {
-
         this.gameService.canvas.start();
         this.gameService.input.start();
         this.gameActor.Snake.start();
         this.gameActor.Food.start();
+        this.gameActor.Wall.start();
 
         let intervalID = this.startMainLoop();
-        this.gameService.Debug.start(intervalID, this.gameService.input);
+        this.gameService.System.start(intervalID);
     }
 
     private startMainLoop() {
         return setInterval(() => {
             this.gameService.canvas.createBackground();
+            this.gameActor.Wall.draw(this.gameService.canvas);
             this.gameActor.Food.draw(this.gameService.canvas);
             this.gameActor.Snake.draw(this.gameService.canvas);
             this.gameService.canvas.draw();

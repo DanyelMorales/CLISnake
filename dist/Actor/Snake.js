@@ -12,21 +12,31 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const AbstractActor_1 = require("./AbstractActor");
 const Canvas_1 = require("../Canvas");
 const Debug_1 = require("../Utils/Debug");
+const Utils_1 = require("../Utils/Utils");
 class Snake extends AbstractActor_1.AbstractActor {
-    constructor(gameService, food) {
+    constructor(gameService, food, wall) {
         super(gameService.configuration);
         this.gameService = gameService;
         this.food = food;
+        this.wall = wall;
     }
     start() {
-        this.addHead({ x: 0, y: 1 });
+        let coordinate = Utils_1.Utils.randomCoordinate(this.configuration.canvas.height, this.configuration.canvas.width);
+        let bones = this.createBones(2, coordinate, "x");
+        this.coordinates = bones;
     }
     eat() {
         this.addHead(this.food.head);
         this.food.isEaten();
     }
     move() {
-        if (this.collision.willActorHasACollision(this, this.food, this.gameService.input.coordinate)) {
+        if (this.collision.willActorHasACollision(this, this.wall, this.gameService.input.coordinate)) {
+            this.gameService.System.kill();
+        }
+        else if (this.collision.willActorHasACollision(this, this, this.gameService.input.coordinate)) {
+            this.gameService.System.kill();
+        }
+        else if (this.collision.willActorHasACollision(this, this.food, this.gameService.input.coordinate)) {
             this.eat();
         }
         else {
@@ -38,7 +48,8 @@ class Snake extends AbstractActor_1.AbstractActor {
             this.move();
         }
         Debug_1.Debug.build().logCoordinate("Snake draw", this.coordinates);
-        canvas.addChar(this.gameService.configuration.snakeChar, this.coordinates);
+        canvas.addChar(this.gameService.configuration.snakeChar.bones, this.coordinates);
+        canvas.addChar(this.gameService.configuration.snakeChar.head, this.coordinates[0]);
     }
 }
 __decorate([

@@ -41,17 +41,19 @@ class Canvas {
         if (!this.initialized || !this.matrix) {
             return;
         }
-        coordinates.forEach((coords) => {
-            if (this.matrix[coords.y]) {
-                this.matrix[coords.y][coords.x] = char;
+        let addCharToMatrix = (c) => {
+            if (this.matrix[c.y]) {
+                this.matrix[c.y][c.x] = char;
             }
-        });
-    }
-    detectCollision(coords) {
-        if (!this.initialized) {
-            return false;
+        };
+        if (coordinates instanceof Array) {
+            coordinates.forEach((coords) => {
+                addCharToMatrix(coords);
+            });
         }
-        return this.matrix[coords.y][coords.x] !== this.configuration.matrixChar;
+        else {
+            addCharToMatrix(coordinates);
+        }
     }
     get initialized() {
         return this._initialized;

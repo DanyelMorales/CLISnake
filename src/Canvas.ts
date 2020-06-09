@@ -1,9 +1,17 @@
 import {Configuration} from "./Configuration/Configuration";
 import {Coordinate} from "./Game";
 import {View} from "./View/View";
-import {Debug, debug} from "./Utils/Debug";
+import {debug} from "./Utils/Debug";
 
-export class Canvas {
+export interface ICanvas {
+    matrix: string[][];
+
+    dispose();
+
+    start();
+}
+
+export class Canvas implements ICanvas {
 
     private _matrix: string[][];
     private _initialized: boolean = false;
@@ -38,24 +46,25 @@ export class Canvas {
         return this._matrix;
     }
 
-    addChar(char: string, coordinates: Coordinate[]) {
+    addChar(char: string, coordinates: Coordinate[] | Coordinate) {
         if (!this.initialized || !this.matrix) {
             return;
         }
-        coordinates.forEach((coords) => {
-            if (this.matrix[coords.y]) {
-                this.matrix[coords.y][coords.x] = char;
+
+        let addCharToMatrix = (c) => {
+            if (this.matrix[c.y]) {
+                this.matrix[c.y][c.x] = char;
             }
-        });
-    }
-
-    detectCollision(coords: Coordinate): boolean {
-        if (!this.initialized) {
-            return false;
+        };
+        if (coordinates instanceof Array) {
+            coordinates.forEach((coords) => {
+                addCharToMatrix(coords);
+            });
+        } else {
+            addCharToMatrix(coordinates);
         }
-        return this.matrix[coords.y][coords.x] !== this.configuration.matrixChar;
-    }
 
+    }
 
     get initialized(): boolean {
         return this._initialized;

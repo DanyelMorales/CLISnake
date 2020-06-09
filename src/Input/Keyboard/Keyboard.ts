@@ -110,9 +110,7 @@ export class Keyboard implements InputDevice {
                     break;
             }
 
-
             Debug.build()
-                .addLog("Movement direction: ", this._direction.toString())
                 .addLog("x:", x.toString())
                 .addLog("Y:", y.toString());
             that._x = x;

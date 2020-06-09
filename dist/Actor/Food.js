@@ -27,9 +27,7 @@ class Food extends AbstractActor_1.AbstractActor {
     create() {
         Debug_1.Debug.build().logCoordinate("Coords before dispose", this.coordinates);
         this.dispose();
-        let randomY = Utils_1.Utils.random(0, this.configuration.canvas.height);
-        let randomX = Utils_1.Utils.random(0, this.configuration.canvas.width);
-        let coordinate = { x: randomX, y: randomY };
+        let coordinate = Utils_1.Utils.randomCoordinate(this.configuration.canvas.height, this.configuration.canvas.width);
         this.addTail(coordinate);
         Debug_1.Debug.build().logCoordinate("Coords after disposes", this.coordinates);
     }

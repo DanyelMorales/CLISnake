@@ -10,6 +10,7 @@ export declare class AbstractActor implements Actor {
     protected _coordinates: Array<Coordinate>;
     private _collision;
     constructor(configuration: Configuration);
+    createBones(numberOfBones: number, coordinate: Coordinate, axis: "x" | "y" | "xy"): Coordinate[];
     addHead(...coordinate: Coordinate[]): void;
     addTail(...coordinate: Coordinate[]): void;
     readonly head: Coordinate | null;
@@ -17,7 +18,7 @@ export declare class AbstractActor implements Actor {
     removeTail(): Coordinate;
     getSymbol(): string;
     dispose(): void;
-    readonly coordinates: Array<Coordinate>;
+    coordinates: Array<Coordinate>;
     sumCoordinates(currentCoordinate: Coordinate, coordinate: Coordinate): Coordinate;
     protected switchTailToHead(coordinate: Coordinate): void;
     protected startSandbox(): void;
