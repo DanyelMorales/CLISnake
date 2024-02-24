@@ -9,11 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Food = void 0;
 const AbstractActor_1 = require("./AbstractActor");
 const Utils_1 = require("../Utils/Utils");
 const Canvas_1 = require("../Canvas");
 const Debug_1 = require("../Utils/Debug");
 class Food extends AbstractActor_1.AbstractActor {
+    gameService;
     constructor(gameService) {
         super(gameService.configuration);
         this.gameService = gameService;
@@ -21,13 +23,19 @@ class Food extends AbstractActor_1.AbstractActor {
     start() {
         this.create();
     }
-    isEaten() {
-        this.create();
+    isEaten(excludeCoordinate) {
+        this.create(excludeCoordinate);
     }
-    create() {
+    create(excludeCoordinate) {
         Debug_1.Debug.build().logCoordinate("Coords before dispose", this.coordinates);
         this.dispose();
-        let coordinate = Utils_1.Utils.randomCoordinate(this.configuration.canvas.height, this.configuration.canvas.width);
+        let coordinate = null;
+        if (excludeCoordinate && excludeCoordinate.length > 0) {
+            coordinate = Utils_1.Utils.randomCoordinateExcludingCoordinates(excludeCoordinate, this.configuration.canvas.height, this.configuration.canvas.width);
+        }
+        else {
+            coordinate = Utils_1.Utils.randomCoordinate(this.configuration.canvas.height, this.configuration.canvas.width);
+        }
         this.addTail(coordinate);
         Debug_1.Debug.build().logCoordinate("Coords after disposes", this.coordinates);
     }
@@ -36,16 +44,16 @@ class Food extends AbstractActor_1.AbstractActor {
         canvas.addChar(this.configuration.foodChar, this.coordinates);
     }
 }
+exports.Food = Food;
 __decorate([
-    Debug_1.debug(),
+    (0, Debug_1.debug)(),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Array]),
     __metadata("design:returntype", void 0)
 ], Food.prototype, "create", null);
 __decorate([
-    Debug_1.debug(),
+    (0, Debug_1.debug)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Canvas_1.Canvas]),
     __metadata("design:returntype", void 0)
 ], Food.prototype, "draw", null);
-exports.Food = Food;

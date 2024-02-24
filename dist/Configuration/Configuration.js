@@ -1,26 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Configuration = void 0;
 class Configuration {
-    constructor() {
-        this._canvas = {
-            width: 10,
-            height: 10
-        };
-        this._snakeChar = {
-            head: "o",
-            bones: "*"
-        };
-        this._matrixChar = ".";
-        this._foodChar = "°";
-        this._wallChar = {
-            x: "═",
-            y: "║",
-            c1: "╔",
-            c2: "╗",
-            c3: "╚",
-            c4: "╝"
-        };
-    }
+    _canvas = {
+        width: 10,
+        height: 10
+    };
+    _snakeChar = {
+        head: "o",
+        bones: "*"
+    };
+    _matrixChar = ".";
+    _foodChar = "°";
+    _wallChar = {
+        x: "═",
+        y: "║",
+        c1: "╔",
+        c2: "╗",
+        c3: "╚",
+        c4: "╝"
+    };
     get canvas() {
         return this._canvas;
     }

@@ -1,13 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Keyboard = void 0;
 const events_1 = require("events");
 const MovementDirection_1 = require("../MovementDirection");
 const Debug_1 = require("../../Utils/Debug");
 const readline = require('readline');
 class KeyBoardHandler {
-    constructor() {
-        this.keyboardEmitter = new events_1.EventEmitter();
-    }
+    keyboardEmitter = new events_1.EventEmitter();
     start() {
         // Key events
         readline.emitKeypressEvents(process.stdin);
@@ -50,10 +49,11 @@ class KeyBoardHandler {
     }
 }
 class Keyboard {
+    _x = -1;
+    _y = -1;
+    _direction;
+    _handler = new KeyBoardHandler();
     constructor() {
-        this._x = -1;
-        this._y = -1;
-        this._handler = new KeyBoardHandler();
     }
     get handler() {
         return this._handler;

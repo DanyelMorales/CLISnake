@@ -13,17 +13,18 @@ export declare class AbstractActor implements Actor {
     createBones(numberOfBones: number, coordinate: Coordinate, axis: "x" | "y" | "xy"): Coordinate[];
     addHead(...coordinate: Coordinate[]): void;
     addTail(...coordinate: Coordinate[]): void;
-    readonly head: Coordinate | null;
-    readonly tail: Coordinate | null;
+    get head(): Coordinate | null;
+    get tail(): Coordinate | null;
     removeTail(): Coordinate;
     getSymbol(): string;
     dispose(): void;
-    coordinates: Array<Coordinate>;
+    set coordinates(value: Array<Coordinate>);
+    get coordinates(): Array<Coordinate>;
     sumCoordinates(currentCoordinate: Coordinate, coordinate: Coordinate): Coordinate;
     protected switchTailToHead(coordinate: Coordinate): void;
     protected startSandbox(): void;
     protected rollback(): void;
-    readonly collision: ActorCollision;
+    get collision(): ActorCollision;
     start(): void;
     draw(canvas: Canvas): void;
 }

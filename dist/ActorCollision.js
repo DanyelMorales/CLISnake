@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ActorCollision = void 0;
 const Debug_1 = require("./Utils/Debug");
 const Collision_1 = require("./Collision");
 class ActorCollision extends Collision_1.Collision {
@@ -30,22 +31,22 @@ class ActorCollision extends Collision_1.Collision {
         return this.isCoordinateInCoordinates(x, secondaryActor.coordinates);
     }
 }
+exports.ActorCollision = ActorCollision;
 __decorate([
-    Debug_1.debug(),
+    (0, Debug_1.debug)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object, Boolean]),
     __metadata("design:returntype", Array)
 ], ActorCollision.prototype, "detectActorCollisions", null);
 __decorate([
-    Debug_1.debug(),
+    (0, Debug_1.debug)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Boolean)
 ], ActorCollision.prototype, "detectActorCollision", null);
 __decorate([
-    Debug_1.debug(),
+    (0, Debug_1.debug)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", void 0)
 ], ActorCollision.prototype, "willActorHasACollision", null);
-exports.ActorCollision = ActorCollision;

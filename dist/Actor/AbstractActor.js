@@ -9,15 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AbstractActor = void 0;
 const Debug_1 = require("../Utils/Debug");
 const ActorCollision_1 = require("../ActorCollision");
 class AbstractActor {
+    configuration;
+    _oldCoordinates = [];
+    stackTrace = [];
+    _coordinates = new Array();
+    _collision = new ActorCollision_1.ActorCollision();
     constructor(configuration) {
         this.configuration = configuration;
-        this._oldCoordinates = [];
-        this.stackTrace = [];
-        this._coordinates = new Array();
-        this._collision = new ActorCollision_1.ActorCollision();
     }
     createBones(numberOfBones, coordinate, axis) {
         let bones = [];
@@ -111,10 +113,10 @@ class AbstractActor {
         throw new Error("Method not implemented.");
     }
 }
+exports.AbstractActor = AbstractActor;
 __decorate([
-    Debug_1.debug(),
+    (0, Debug_1.debug)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AbstractActor.prototype, "switchTailToHead", null);
-exports.AbstractActor = AbstractActor;

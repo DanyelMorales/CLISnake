@@ -1,4 +1,4 @@
-declare type WallChars = {
+type WallChars = {
     x: string;
     y: string;
     c1: string;
@@ -6,7 +6,7 @@ declare type WallChars = {
     c3: string;
     c4: string;
 };
-declare type SnakeChars = {
+type SnakeChars = {
     head: string;
     bones: string;
 };
@@ -16,13 +16,13 @@ export declare class Configuration {
     private _matrixChar;
     private _foodChar;
     private _wallChar;
-    readonly canvas: {
+    get canvas(): {
         width: number;
         height: number;
     };
-    readonly snakeChar: SnakeChars;
-    readonly matrixChar: string;
-    readonly foodChar: string;
-    readonly wallChar: WallChars;
+    get snakeChar(): SnakeChars;
+    get matrixChar(): string;
+    get foodChar(): string;
+    get wallChar(): WallChars;
 }
 export {};

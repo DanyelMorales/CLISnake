@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CliSnake = void 0;
 const Canvas_1 = require("../Canvas");
 const Debug_1 = require("../Utils/Debug");
 class CliSnake {
@@ -18,10 +19,10 @@ class CliSnake {
         console.log('\x1Bc' + rendered);
     }
 }
+exports.CliSnake = CliSnake;
 __decorate([
-    Debug_1.debug(),
+    (0, Debug_1.debug)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Canvas_1.Canvas]),
     __metadata("design:returntype", void 0)
 ], CliSnake.prototype, "render", null);
-exports.CliSnake = CliSnake;

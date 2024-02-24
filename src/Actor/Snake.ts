@@ -21,7 +21,7 @@ export class Snake extends AbstractActor {
     @debug()
     eat() {
         this.addHead(this.food.head);
-        this.food.isEaten();
+        this.food.isEaten(this.coordinates);
     }
 
     @debug()

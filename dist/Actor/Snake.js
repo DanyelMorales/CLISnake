@@ -9,11 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Snake = void 0;
 const AbstractActor_1 = require("./AbstractActor");
 const Canvas_1 = require("../Canvas");
 const Debug_1 = require("../Utils/Debug");
 const Utils_1 = require("../Utils/Utils");
 class Snake extends AbstractActor_1.AbstractActor {
+    gameService;
+    food;
+    wall;
     constructor(gameService, food, wall) {
         super(gameService.configuration);
         this.gameService = gameService;
@@ -27,7 +31,7 @@ class Snake extends AbstractActor_1.AbstractActor {
     }
     eat() {
         this.addHead(this.food.head);
-        this.food.isEaten();
+        this.food.isEaten(this.coordinates);
     }
     move() {
         if (this.collision.willActorHasACollision(this, this.wall, this.gameService.input.coordinate)) {
@@ -52,22 +56,22 @@ class Snake extends AbstractActor_1.AbstractActor {
         canvas.addChar(this.gameService.configuration.snakeChar.head, this.coordinates[0]);
     }
 }
+exports.Snake = Snake;
 __decorate([
-    Debug_1.debug(),
+    (0, Debug_1.debug)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], Snake.prototype, "eat", null);
 __decorate([
-    Debug_1.debug(),
+    (0, Debug_1.debug)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], Snake.prototype, "move", null);
 __decorate([
-    Debug_1.debug(),
+    (0, Debug_1.debug)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Canvas_1.Canvas]),
     __metadata("design:returntype", void 0)
 ], Snake.prototype, "draw", null);
-exports.Snake = Snake;

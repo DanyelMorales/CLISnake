@@ -13,4 +13,15 @@ export class Utils {
 
         return {x: randomX, y:randomY};
     }
+
+    static randomCoordinateExcludingCoordinates( excludeCoordinate:Array<Coordinate>, height, width):Coordinate {
+       let coordinates = Utils.randomCoordinate(height,width);
+        for (let point = 0; point < excludeCoordinate.length; point++) {
+            let excludePoint = excludeCoordinate[point];
+            if(excludePoint.x === coordinates.x && excludePoint.y === coordinates.y ){
+                return Utils.randomCoordinateExcludingCoordinates(excludeCoordinate, height,width);
+            }
+        }
+       return coordinates;
+    }
 }

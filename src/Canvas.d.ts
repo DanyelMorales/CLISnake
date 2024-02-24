@@ -14,11 +14,11 @@ export declare class Canvas implements ICanvas {
     constructor(configuration: Configuration, view: View);
     createBackground(): void;
     draw(): void;
-    readonly height: number;
-    readonly width: number;
-    readonly matrix: string[][];
+    get height(): number;
+    get width(): number;
+    get matrix(): string[][];
     addChar(char: string, coordinates: Coordinate[] | Coordinate): void;
-    readonly initialized: boolean;
+    get initialized(): boolean;
     dispose(): void;
     start(): void;
 }

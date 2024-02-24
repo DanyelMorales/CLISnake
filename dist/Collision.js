@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Collision = void 0;
 const Debug_1 = require("./Utils/Debug");
 class Collision {
     constructor() {
@@ -31,22 +32,22 @@ class Collision {
         return this.searchCoordinateInCoordinates(myCoordinate, coordinates).length > 0;
     }
 }
+exports.Collision = Collision;
 __decorate([
-    Debug_1.debug(),
+    (0, Debug_1.debug)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Array, Array]),
     __metadata("design:returntype", Array)
 ], Collision.prototype, "searchCollision", null);
 __decorate([
-    Debug_1.debug(),
+    (0, Debug_1.debug)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Array]),
     __metadata("design:returntype", void 0)
 ], Collision.prototype, "searchCoordinateInCoordinates", null);
 __decorate([
-    Debug_1.debug(),
+    (0, Debug_1.debug)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Array]),
     __metadata("design:returntype", void 0)
 ], Collision.prototype, "isCoordinateInCoordinates", null);
-exports.Collision = Collision;

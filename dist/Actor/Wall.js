@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Wall = void 0;
 const AbstractActor_1 = require("./AbstractActor");
 class Wall extends AbstractActor_1.AbstractActor {
+    gameService;
     constructor(gameService) {
         super(gameService.configuration);
         this.gameService = gameService;

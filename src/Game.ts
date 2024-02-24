@@ -85,6 +85,6 @@ export class Game {
             this.gameService.canvas.draw();
             this.gameService.input.reset();
             this.gameService.canvas.dispose();
-        }, 80);
+        }, 50);
     }
 }

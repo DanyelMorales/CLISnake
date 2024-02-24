@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { View } from "../View/View";
 import { ICanvas } from "../Canvas";
 import { InputDevice } from "../Input/InputDevice";

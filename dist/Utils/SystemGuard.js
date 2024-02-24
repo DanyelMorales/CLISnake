@@ -9,13 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SystemGuard = void 0;
 const MovementDirection_1 = require("../Input/MovementDirection");
 const Debug_1 = require("./Debug");
 const events_1 = require("events");
 class SystemCanvas {
-    constructor() {
-        this._matrix = [];
-    }
+    _matrix = [];
     get matrix() {
         return this._matrix;
     }
@@ -27,6 +26,10 @@ class SystemCanvas {
     }
 }
 class SystemGuard extends events_1.EventEmitter {
+    input;
+    view;
+    results;
+    mainLoopId;
     constructor(input, view) {
         super();
         this.input = input;
@@ -57,10 +60,10 @@ class SystemGuard extends events_1.EventEmitter {
         this.view.render(this.results);
     }
 }
+exports.SystemGuard = SystemGuard;
 __decorate([
-    Debug_1.debug(),
+    (0, Debug_1.debug)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], SystemGuard.prototype, "kill", null);
-exports.SystemGuard = SystemGuard;

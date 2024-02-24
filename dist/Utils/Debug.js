@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Debug = exports.debug = void 0;
 const log4js_1 = require("log4js");
 function debug(debugMode = "FULL") {
     return function (target, propertyKey, descriptor) {
@@ -23,6 +24,8 @@ function debug(debugMode = "FULL") {
 }
 exports.debug = debug;
 class Debug {
+    static me;
+    logger;
     static build() {
         if (!this.me) {
             this.me = new Debug();
@@ -30,8 +33,8 @@ class Debug {
         return this.me;
     }
     constructor() {
-        this.logger = log4js_1.getLogger();
-        log4js_1.configure({
+        this.logger = (0, log4js_1.getLogger)();
+        (0, log4js_1.configure)({
             appenders: { cheese: { type: "file", filename: "snake.log" } },
             categories: { default: { appenders: ["cheese"], level: "error" } }
         });

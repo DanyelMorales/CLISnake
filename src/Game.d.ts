@@ -5,7 +5,7 @@ import { Actor } from "./Actor/Actor";
 import { Debug } from "./Utils/Debug";
 import { SystemGuard } from "./Utils/SystemGuard";
 import { Wall } from "./Actor/Wall";
-export declare type Coordinate = {
+export type Coordinate = {
     x: number;
     y: number;
 };

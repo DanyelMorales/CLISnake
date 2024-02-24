@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Game = void 0;
 const Canvas_1 = require("./Canvas");
 const Configuration_1 = require("./Configuration/Configuration");
 const Keyboard_1 = require("./Input/Keyboard/Keyboard");
@@ -10,6 +11,8 @@ const Debug_1 = require("./Utils/Debug");
 const SystemGuard_1 = require("./Utils/SystemGuard");
 const Wall_1 = require("./Actor/Wall");
 class Game {
+    gameService;
+    gameActor;
     constructor(gameService, gameActor) {
         this.gameService = gameService;
         this.gameActor = gameActor;
@@ -57,7 +60,7 @@ class Game {
             this.gameService.canvas.draw();
             this.gameService.input.reset();
             this.gameService.canvas.dispose();
-        }, 80);
+        }, 50);
     }
 }
 exports.Game = Game;
